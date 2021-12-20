@@ -2,19 +2,24 @@
 import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
 
+import Header from './kit/Header';
+
 export default function ScrollViewScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.large} />
-      <ScrollView horizontal>
+    <>
+      <Header></Header>
+      <ScrollView style={styles.container}>
+        <View style={styles.large} />
+        <ScrollView horizontal>
+          <View style={styles.small} />
+          <View style={styles.small} />
+          <View style={styles.small} />
+        </ScrollView>
+        <View style={styles.large} />
         <View style={styles.small} />
-        <View style={styles.small} />
-        <View style={styles.small} />
+        <View style={styles.large} />
       </ScrollView>
-      <View style={styles.large} />
-      <View style={styles.small} />
-      <View style={styles.large} />
-    </ScrollView>
+    </>
   )
 }
 
