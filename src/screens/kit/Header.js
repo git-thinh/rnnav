@@ -9,6 +9,8 @@ import {
 } from "native-base"
 import { Path, G } from "react-native-svg";
 
+import { EventRegister } from '../../EventRegister'
+
 export default function Header() {
     const _bgHeader = 'gray.900';
     const _colorText = 'gray.100';
@@ -74,6 +76,9 @@ export default function Header() {
                     </Flex>
                     <Center bg={_bgHeader}>
                         <Text color={_colorText}>{_title}</Text>
+                        <Button title='123' onPress={() => {
+                            EventRegister.emit('myCustomEvent', 'it works!!!');
+                        }}></Button>
                     </Center>
                     <Flex direction="row" justifyContent="space-between" mt="1">
                         <Center size="6" bg={_bgHeader} mr="1">

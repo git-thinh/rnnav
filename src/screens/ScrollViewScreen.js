@@ -20,9 +20,6 @@ export default function ScrollViewScreen({ navigation, route }) {
       <ScrollView style={styles.container}>
         <View style={styles.large} />
         <ScrollView horizontal>
-          <Button title='_openMenuBar' onPress={() => {
-            EventRegister.emit('myCustomEvent', 'it works!!!');
-          }}></Button>
           <View style={styles.small} />
           <View style={styles.small} />
           <View style={styles.small} />
