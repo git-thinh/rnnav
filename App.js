@@ -4,12 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import {
   useColorMode, NativeBaseProvider, extendTheme, useToast,
   Modal, FormControl, Input, Button
-} from "native-base"
+} from "native-base";
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
-import { EventRegister } from './src/EventRegister'
+import { EventRegister } from './src/libs/EventRegister'
 
 import LoginScreen from './src/screens/LoginScreen';
 import InputScreen from './src/screens/InputScreen';
@@ -36,9 +36,9 @@ function App() {
     setPlacement(placement)
   }
   
-  this.listener = EventRegister.addEventListener('myCustomEvent', (data) => {
-    console.log('Event: data = ', data);
-    openModal("left");
+  EventRegister.addEventListener('EVENT_APP', (data) => {
+    console.log('EVENT_APP = ', data);
+    //openModal("left");
   });
 
   const theme = extendTheme({
