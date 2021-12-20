@@ -1,16 +1,28 @@
 
 import React from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View, Button } from 'react-native'
 
 import Header from './kit/Header';
+import { EventRegister } from '../EventRegister'
 
-export default function ScrollViewScreen() {
+export default function ScrollViewScreen({ navigation, route }) {
+
+  // React.useEffect(() => {
+  //   if (route.params?.eventApp) {
+  //     // Post updated, do something with `route.params.post`
+  //     // For example, send the post to the server
+  //   }
+  // }, [route.params?.eventApp]);
+
   return (
     <>
       <Header></Header>
       <ScrollView style={styles.container}>
         <View style={styles.large} />
         <ScrollView horizontal>
+          <Button title='_openMenuBar' onPress={() => {
+            EventRegister.emit('myCustomEvent', 'it works!!!');
+          }}></Button>
           <View style={styles.small} />
           <View style={styles.small} />
           <View style={styles.small} />

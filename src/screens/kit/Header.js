@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import {
     HStack, Flex, Box, Center, Divider, Text, Modal, FormControl, Button, Input,
     createIcon, Icon,
@@ -8,26 +8,6 @@ import {
     ChevronLeftIcon, ChevronRightIcon
 } from "native-base"
 import { Path, G } from "react-native-svg";
-
-const styles = {
-    top: {
-        marginBottom: "auto",
-        marginTop: 0,
-    },
-    bottom: {
-        marginBottom: 0,
-        marginTop: "auto",
-    },
-    left: {
-        marginLeft: 0,
-        marginRight: "auto",
-    },
-    right: {
-        marginLeft: "auto",
-        marginRight: 0,
-    },
-    center: {},
-};
 
 export default function Header() {
     const _bgHeader = 'gray.900';
@@ -67,13 +47,6 @@ export default function Header() {
         )
     };
 
-    const [placement, setPlacement] = useState(undefined)
-    const [open, setOpen] = useState(false)
-
-    const openModal = (placement) => {
-        setOpen(true)
-        setPlacement(placement)
-    }
 
     return (
         <>
@@ -101,7 +74,6 @@ export default function Header() {
                     </Flex>
                     <Center bg={_bgHeader}>
                         <Text color={_colorText}>{_title}</Text>
-                        <Button onPress={() => openModal("left")}>Left</Button>
                     </Center>
                     <Flex direction="row" justifyContent="space-between" mt="1">
                         <Center size="6" bg={_bgHeader} mr="1">
@@ -132,42 +104,6 @@ export default function Header() {
                 </Flex>
                 <Divider mt="0.5" bg="gray.100" height="0.5px" />
             </Box>
-            <Modal isOpen={open} onClose={() => setOpen(false)} mt={12}>
-                <Modal.Content maxWidth="350" {...styles[placement]}>
-                    <Modal.CloseButton />
-                    <Modal.Header>Contact Us</Modal.Header>
-                    <Modal.Body>
-                        <FormControl>
-                            <FormControl.Label>Name</FormControl.Label>
-                            <Input />
-                        </FormControl>
-                        <FormControl mt="3">
-                            <FormControl.Label>Email</FormControl.Label>
-                            <Input />
-                        </FormControl>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button.Group space={2}>
-                            <Button
-                                variant="ghost"
-                                colorScheme="blueGray"
-                                onPress={() => {
-                                    setOpen(false)
-                                }}
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                onPress={() => {
-                                    setOpen(false)
-                                }}
-                            >
-                                Save
-                            </Button>
-                        </Button.Group>
-                    </Modal.Footer>
-                </Modal.Content>
-            </Modal>
         </>
     )
 }
