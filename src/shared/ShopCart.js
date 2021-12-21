@@ -8,7 +8,7 @@ const ShopCart = (props) => {
 
     const _screenHeight = Dimensions.get('window').height;
     const _screenWidth = Dimensions.get('window').width;
-    console.log(_screenWidth, _screenHeight);
+    //console.log(_screenWidth, _screenHeight);
 
     return (<>
         <Box {...props} flex='1' width={_screenWidth} height={_screenHeight} position='absolute' zIndex={1}>

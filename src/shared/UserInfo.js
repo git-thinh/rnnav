@@ -3,15 +3,15 @@ import { Dimensions } from 'react-native';
 import { Box, Button, Heading, Center, Divider } from 'native-base';
 import { EventRegister } from '../libs/EventRegister';
 
-const Loading = (props) => {
-    const _title = 'Loading';
+const UserInfo = (props) => {
+    const _title = 'UserInfo';
 
     const _screenHeight = Dimensions.get('window').height;
     const _screenWidth = Dimensions.get('window').width;
     //console.log(_screenWidth, _screenHeight);
 
     return (<>
-        <Box {...props} flex='1' width={_screenWidth} height={_screenHeight} position='absolute' zIndex={99999}>
+        <Box {...props} flex='1' width={_screenWidth} height={_screenHeight} position='absolute' zIndex={1}>
             <Box width={_screenWidth} height={_screenHeight} bg='coolGray.100'
                 position='absolute' zIndex={0} opacity={0.4}></Box>
             <Box width={_screenWidth} height={_screenHeight}
@@ -20,7 +20,7 @@ const Loading = (props) => {
                 <Center bg='coolGray.100' p={5}>
                     <Heading>{_title}</Heading>
                     <Button onPress={() => {
-                        EventRegister.emit('EVENT_APP', { code: 'LOADING_CLOSE' });
+                        EventRegister.emit('EVENT_APP', { code: 'USER_CLOSE' });
                     }}>Close</Button>
                 </Center>
             </Box>
@@ -28,4 +28,4 @@ const Loading = (props) => {
     </>);
 };
 
-export default Loading;
+export default UserInfo;

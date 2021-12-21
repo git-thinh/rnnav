@@ -26,16 +26,21 @@ import MenuBar from './src/shared/MenuBar';
 import Ads from './src/shared/Ads';
 import Loading from './src/shared/Loading';
 import ShopCart from './src/shared/ShopCart';
+import MessageBox from './src/shared/MessageBox';
+import UserInfo from './src/shared/UserInfo';
 
 function App() {
   const [adsVisible, setAdsVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [loadingVisible, setLoadingVisible] = useState(false);
-  const [cartVisible, setCartVisible] = useState(true);
+  const [cartVisible, setCartVisible] = useState(false);
+  const [msgVisible, setMsgVisible] = useState(false);
+  const [userVisible, setUserVisible] = useState(false);
 
   // Tương tự như componentDidMount và componentDidUpdate:
   useEffect(() => {
     EventRegister.addEventListener('EVENT_APP', _onPopupOpen);
+    return () => { EventRegister.removeEventListener('EVENT_APP'); };
   });
 
   const _onPopupOpen = (data) => {
@@ -57,6 +62,16 @@ function App() {
           return setCartVisible(true);
         case 'CART_CLOSE':
           return setCartVisible(false);
+        case 'MSG_OPEN':
+          setMenuVisible(false);
+          return setMsgVisible(true);
+        case 'MSG_CLOSE':
+          return setMsgVisible(false);
+        case 'USER_OPEN':
+          setMenuVisible(false);
+          return setUserVisible(true);
+        case 'USER_CLOSE':
+          return setUserVisible(false);
 
         case 'PROFILE_OPEN':
           break;
@@ -121,6 +136,8 @@ function App() {
       </NavigationContainer>
       {menuVisible && <MenuBar />}
       {cartVisible && <ShopCart />}
+      {msgVisible && <MessageBox />}
+      {userVisible && <UserInfo />}
     </NativeBaseProvider>
   );
 }
