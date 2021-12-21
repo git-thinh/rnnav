@@ -44,7 +44,7 @@ function App() {
   const [userVisible, setUserVisible] = useState(false);
   const [chatVisible, setChatVisible] = useState(false);
   const [itemVisible, setItemVisible] = useState(false);
-  const [contactVisible, setContactVisible] = useState(false);
+  const [contactVisible, setContactVisible] = useState(true);
 
   useEffect(() => {
     //AsyncStorage.setItem('@code', '');
