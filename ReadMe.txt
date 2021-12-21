@@ -14,3 +14,9 @@ https://www.reactnative.express/app/project_structure
 * native-base:
     - react-native-svg
     - native-base
+
+* Other:
+    - @react-native-async-storage/async-storage
+
+    # https://react-native-async-storage.github.io/async-storage/docs/usage
+    # https://github.com/kirankalyan5/react-native-segmented-control-tab

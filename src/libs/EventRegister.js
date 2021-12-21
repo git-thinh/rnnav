@@ -55,6 +55,11 @@ class EventRegister {
     })
   }
 
+  static send(data) {
+    const eventName = 'EVENT_APP';
+    EventRegister.emitEvent(eventName, data);
+  }
+
   /*
    * shortener
    */

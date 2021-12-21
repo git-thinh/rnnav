@@ -27,6 +27,7 @@ const MenuBar = (props) => {
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'MSG_OPEN' }); }} mt={2}>MSG_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'USER_OPEN' }); }} mt={2}>USER_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'CHAT_OPEN' }); }} mt={2}>CHAT_OPEN</Button>
+                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'CONTACT_OPEN' }); }} mt={2}>CONTACT_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'ITEM_OPEN' }); }} mt={2}>ITEM_OPEN</Button>
                 </Center>
             </Box>

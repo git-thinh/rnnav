@@ -31,18 +31,20 @@ import MessageBox from './src/shared/MessageBox';
 import UserInfo from './src/shared/UserInfo';
 import ChatBox from './src/shared/ChatBox';
 import ItemBox from './src/shared/ItemBox';
+import Contact from './src/shared/Contact';
 
 function App() {
   const [_code, _setCode] = useState('');
 
-  const [adsVisible, setAdsVisible] = useState(false);  
+  const [adsVisible, setAdsVisible] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [cartVisible, setCartVisible] = useState(false);
   const [msgVisible, setMsgVisible] = useState(false);
-  const [userVisible, setUserVisible] = useState(false);
+  const [userVisible, setUserVisible] = useState(true);
   const [chatVisible, setChatVisible] = useState(false);
   const [itemVisible, setItemVisible] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
 
   useEffect(() => {
     //AsyncStorage.setItem('@code', '');
@@ -50,18 +52,31 @@ function App() {
     return () => { EventRegister.removeEventListener('EVENT_APP'); };
   });
 
-  const _onPopupOpen = (data) => {
-    if (data && data.code) {
-      const code = data.code;
+  const _onPopupOpen = async (v) => {
+    if (v && v.code) {
+      const code = v.code;
       if (code == _code) return;
+      let o = v.data;
       //console.log('EVENT_APP -> ' + code + ' === ' + _code);
+      console.log('EVENT_APP -> ' + code, v.data);
       _setCode(code);
 
       switch (code) {
+        case 'USER_OPEN':
+          setMenuVisible(false);
+          return setUserVisible(true);
+        case 'USER_CLOSE':
+          return setUserVisible(false);
+        case 'USER_LOGIN':
+          await AsyncStorage.setItem('@user', o)
+          _setCode('');
+          break;
+        //-----------------------------------------------------------
         case 'LOADING_OPEN': return setLoadingVisible(true);
         case 'LOADING_CLOSE': return setLoadingVisible(false);
         case 'ADS_OPEN': return setAdsVisible(true);
         case 'ADS_CLOSE': return setAdsVisible(false);
+        //-----------------------------------------------------------
 
         case 'MENU_OPEN':
           setCartVisible(false);
@@ -78,11 +93,6 @@ function App() {
           return setMsgVisible(true);
         case 'MSG_CLOSE':
           return setMsgVisible(false);
-        case 'USER_OPEN':
-          setMenuVisible(false);
-          return setUserVisible(true);
-        case 'USER_CLOSE':
-          return setUserVisible(false);
         case 'CHAT_OPEN':
           setMenuVisible(false);
           return setChatVisible(true);
@@ -93,6 +103,11 @@ function App() {
           return setItemVisible(true);
         case 'ITEM_CLOSE':
           return setItemVisible(false);
+        case 'CONTACT_OPEN':
+          setMenuVisible(false);
+          return setContactVisible(true);
+        case 'CONTACT_CLOSE':
+          return setContactVisible(false);
       }
     }
   };
@@ -154,6 +169,7 @@ function App() {
       {userVisible && <UserInfo />}
       {chatVisible && <ChatBox />}
       {itemVisible && <ItemBox />}
+      {contactVisible && <Contact />}
     </NativeBaseProvider>
   );
 }
