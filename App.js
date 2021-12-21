@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, extendTheme } from "native-base";
 import { EventRegister } from './src/libs/EventRegister';
@@ -25,34 +25,39 @@ import PhotoScreen from './src/screens/PhotoScreen';
 import MenuBar from './src/shared/MenuBar';
 import Ads from './src/shared/Ads';
 import Loading from './src/shared/Loading';
+import ShopCart from './src/shared/ShopCart';
 
 function App() {
-  const [menuVisible, setMenuVisible] = useState(false);
   const [adsVisible, setAdsVisible] = useState(false);
-  const [loadingVisible, setLoadingVisible] = useState(true);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(false);
+  const [cartVisible, setCartVisible] = useState(true);
+
+  // Tương tự như componentDidMount và componentDidUpdate:
+  useEffect(() => {
+    EventRegister.addEventListener('EVENT_APP', _onPopupOpen);
+  });
 
   const _onPopupOpen = (data) => {
     console.log('EVENT_APP = ', data);
     if (data && data.code) {
       switch (data.code) {
-        case 'LOADING_OPEN':
-          return setLoadingVisible(true);
-        case 'LOADING_CLOSE':
-          return setLoadingVisible(false);
+        case 'LOADING_OPEN': return setLoadingVisible(true);
+        case 'LOADING_CLOSE': return setLoadingVisible(false);
+        case 'ADS_OPEN': return setAdsVisible(true);
+        case 'ADS_CLOSE': return setAdsVisible(false);
+
         case 'MENU_OPEN':
-          setAdsVisible(false);
-          setMenuVisible(true);
-          break;
-        case 'ADS_OPEN':
-          setMenuVisible(false);
-          setAdsVisible(true);
-          break;
-        case 'CART_OPEN':
-          break;
+          setCartVisible(false);
+          return setMenuVisible(true);
         case 'MENU_CLOSE':
           return setMenuVisible(false);
-        case 'ADS_CLOSE':
-          return setAdsVisible(false);
+        case 'CART_OPEN':
+          setMenuVisible(false);
+          return setCartVisible(true);
+        case 'CART_CLOSE':
+          return setCartVisible(false);
+
         case 'PROFILE_OPEN':
           break;
         case 'NOTIFY_OPEN':
@@ -62,7 +67,7 @@ function App() {
       }
     }
   };
-  EventRegister.addEventListener('EVENT_APP', _onPopupOpen);
+
 
   const theme = extendTheme({
     colors: {
@@ -93,8 +98,8 @@ function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
-      {adsVisible && <Ads/>}
-      {loadingVisible && <Loading/>}
+      {adsVisible && <Ads />}
+      {loadingVisible && <Loading />}
       <NavigationContainer>
         {/* <Stack.Screen name="Home"> {props => <HomeScreen {...props} extraData={{ someData: 12345 }} />} </Stack.Screen> */}
         <Stack.Navigator initialRouteName="ScrollViewScreen" screenOptions={{ headerShown: false }}>
@@ -114,7 +119,8 @@ function App() {
           <Stack.Screen name="Photo" component={PhotoScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-      {menuVisible && <MenuBar/>}
+      {menuVisible && <MenuBar />}
+      {cartVisible && <ShopCart />}
     </NativeBaseProvider>
   );
 }
