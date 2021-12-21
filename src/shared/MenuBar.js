@@ -19,12 +19,15 @@ const MenuBar = (props) => {
                 <Heading>{_title}</Heading>
                 <Divider my="2" />
                 <Center>
-                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'MENU_CLOSE' }); }}>Close</Button>
+                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'MENU_CLOSE' }); }}>MENU_CLOSE</Button>
+                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'MENU_OPEN' }); }} mt={2}>MENU_OPEN</Button>
+                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'LOADING_OPEN' }); }} mt={2}>LOADING_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'ADS_OPEN' }); }} mt={2}>ADS_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'CART_OPEN' }); }} mt={2}>CART_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'MSG_OPEN' }); }} mt={2}>MSG_OPEN</Button>
                     <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'USER_OPEN' }); }} mt={2}>USER_OPEN</Button>
-                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'LOADING_OPEN' }); }} mt={2}>LOADING_OPEN</Button>
+                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'CHAT_OPEN' }); }} mt={2}>CHAT_OPEN</Button>
+                    <Button onPress={() => { EventRegister.emit('EVENT_APP', { code: 'ITEM_OPEN' }); }} mt={2}>ITEM_OPEN</Button>
                 </Center>
             </Box>
         </Box>

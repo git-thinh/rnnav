@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { NativeBaseProvider, extendTheme } from "native-base";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { EventRegister } from './src/libs/EventRegister';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -28,25 +29,35 @@ import Loading from './src/shared/Loading';
 import ShopCart from './src/shared/ShopCart';
 import MessageBox from './src/shared/MessageBox';
 import UserInfo from './src/shared/UserInfo';
+import ChatBox from './src/shared/ChatBox';
+import ItemBox from './src/shared/ItemBox';
 
 function App() {
-  const [adsVisible, setAdsVisible] = useState(false);
+  const [_code, _setCode] = useState('');
+
+  const [adsVisible, setAdsVisible] = useState(false);  
   const [menuVisible, setMenuVisible] = useState(false);
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [cartVisible, setCartVisible] = useState(false);
   const [msgVisible, setMsgVisible] = useState(false);
   const [userVisible, setUserVisible] = useState(false);
+  const [chatVisible, setChatVisible] = useState(false);
+  const [itemVisible, setItemVisible] = useState(false);
 
-  // Tương tự như componentDidMount và componentDidUpdate:
   useEffect(() => {
-    EventRegister.addEventListener('EVENT_APP', _onPopupOpen);
+    //AsyncStorage.setItem('@code', '');
+    EventRegister.addEventListener('EVENT_APP', _onPopupOpen, true);
     return () => { EventRegister.removeEventListener('EVENT_APP'); };
   });
 
   const _onPopupOpen = (data) => {
-    console.log('EVENT_APP = ', data);
     if (data && data.code) {
-      switch (data.code) {
+      const code = data.code;
+      if (code == _code) return;
+      //console.log('EVENT_APP -> ' + code + ' === ' + _code);
+      _setCode(code);
+
+      switch (code) {
         case 'LOADING_OPEN': return setLoadingVisible(true);
         case 'LOADING_CLOSE': return setLoadingVisible(false);
         case 'ADS_OPEN': return setAdsVisible(true);
@@ -72,13 +83,16 @@ function App() {
           return setUserVisible(true);
         case 'USER_CLOSE':
           return setUserVisible(false);
-
-        case 'PROFILE_OPEN':
-          break;
-        case 'NOTIFY_OPEN':
-          break;
         case 'CHAT_OPEN':
-          break;
+          setMenuVisible(false);
+          return setChatVisible(true);
+        case 'CHAT_CLOSE':
+          return setChatVisible(false);
+        case 'ITEM_OPEN':
+          setMenuVisible(false);
+          return setItemVisible(true);
+        case 'ITEM_CLOSE':
+          return setItemVisible(false);
       }
     }
   };
@@ -138,6 +152,8 @@ function App() {
       {cartVisible && <ShopCart />}
       {msgVisible && <MessageBox />}
       {userVisible && <UserInfo />}
+      {chatVisible && <ChatBox />}
+      {itemVisible && <ItemBox />}
     </NativeBaseProvider>
   );
 }

@@ -7,19 +7,23 @@ class EventRegister {
     refs: {},
   }
 
-  static addEventListener(eventName, callback) {
-    if (
-      type(eventName) === 'string' &&
-      type(callback) === 'function'
-    ) {
-      EventRegister._Listeners.count++
-      const eventId = 'l' + EventRegister._Listeners.count
-      EventRegister._Listeners.refs[eventId] = {
-        name: eventName,
-        callback,
+  static addEventListener(eventName, callback, clearAll) {
+    try {
+      if (
+        type(eventName) === 'string' &&
+        type(callback) === 'function'
+      ) {
+        if (clearAll == true) EventRegister.removeAllListeners();
+
+        EventRegister._Listeners.count++
+        const eventId = 'l' + EventRegister._Listeners.count
+        EventRegister._Listeners.refs[eventId] = {
+          name: eventName,
+          callback,
+        }
+        return eventId
       }
-      return eventId
-    }
+    } catch (e) { }
     return false
   }
 
@@ -32,10 +36,12 @@ class EventRegister {
 
   static removeAllListeners() {
     let removeError = false
-    Object.keys(EventRegister._Listeners.refs).forEach(_id => {
-      const removed = delete EventRegister._Listeners.refs[_id]
-      removeError = (!removeError) ? !removed : removeError
-    })
+    try {
+      Object.keys(EventRegister._Listeners.refs).forEach(_id => {
+        const removed = delete EventRegister._Listeners.refs[_id]
+        removeError = (!removeError) ? !removed : removeError
+      });
+    } catch (e) { }
     return !removeError
   }
 
@@ -68,6 +74,6 @@ class EventRegister {
     EventRegister.emitEvent(eventName, data)
   }
 
-} 
+}
 
 export { EventRegister }
