@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-
-import {
-  useColorMode, NativeBaseProvider, extendTheme, useToast,
-  Modal, FormControl, Input, Button
-} from "native-base";
+import { NativeBaseProvider, extendTheme } from "native-base";
+import { EventRegister } from './src/libs/EventRegister';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
-import { EventRegister } from './src/libs/EventRegister'
 
 import LoginScreen from './src/screens/LoginScreen';
 import InputScreen from './src/screens/InputScreen';
@@ -26,20 +22,47 @@ import AjaxScreen from './src/screens/AjaxScreen';
 import DrapDropScreen from './src/screens/DrapDropScreen';
 import PhotoScreen from './src/screens/PhotoScreen';
 
+import MenuBar from './src/shared/MenuBar';
+import Ads from './src/shared/Ads';
+import Loading from './src/shared/Loading';
 
 function App() {
-  const [placement, setPlacement] = useState(undefined)
-  const [open, setOpen] = useState(false)
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [adsVisible, setAdsVisible] = useState(false);
+  const [loadingVisible, setLoadingVisible] = useState(true);
 
-  const openModal = (placement) => {
-    setOpen(true)
-    setPlacement(placement)
-  }
-  
-  EventRegister.addEventListener('EVENT_APP', (data) => {
+  const _onPopupOpen = (data) => {
     console.log('EVENT_APP = ', data);
-    //openModal("left");
-  });
+    if (data && data.code) {
+      switch (data.code) {
+        case 'LOADING_OPEN':
+          return setLoadingVisible(true);
+        case 'LOADING_CLOSE':
+          return setLoadingVisible(false);
+        case 'MENU_OPEN':
+          setAdsVisible(false);
+          setMenuVisible(true);
+          break;
+        case 'ADS_OPEN':
+          setMenuVisible(false);
+          setAdsVisible(true);
+          break;
+        case 'CART_OPEN':
+          break;
+        case 'MENU_CLOSE':
+          return setMenuVisible(false);
+        case 'ADS_CLOSE':
+          return setAdsVisible(false);
+        case 'PROFILE_OPEN':
+          break;
+        case 'NOTIFY_OPEN':
+          break;
+        case 'CHAT_OPEN':
+          break;
+      }
+    }
+  };
+  EventRegister.addEventListener('EVENT_APP', _onPopupOpen);
 
   const theme = extendTheme({
     colors: {
@@ -70,6 +93,8 @@ function App() {
 
   return (
     <NativeBaseProvider theme={theme}>
+      {adsVisible && <Ads/>}
+      {loadingVisible && <Loading/>}
       <NavigationContainer>
         {/* <Stack.Screen name="Home"> {props => <HomeScreen {...props} extraData={{ someData: 12345 }} />} </Stack.Screen> */}
         <Stack.Navigator initialRouteName="ScrollViewScreen" screenOptions={{ headerShown: false }}>
@@ -89,65 +114,9 @@ function App() {
           <Stack.Screen name="Photo" component={PhotoScreen} />
         </Stack.Navigator>
       </NavigationContainer>
-
-      <Modal isOpen={open} onClose={() => setOpen(false)} mt={12}>
-        <Modal.Content maxWidth="350" {...styles[placement]}>
-          <Modal.CloseButton />
-          <Modal.Header>Contact Us</Modal.Header>
-          <Modal.Body>
-            <FormControl>
-              <FormControl.Label>Name</FormControl.Label>
-              <Input />
-            </FormControl>
-            <FormControl mt="3">
-              <FormControl.Label>Email</FormControl.Label>
-              <Input />
-            </FormControl>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button.Group space={2}>
-              <Button
-                variant="ghost"
-                colorScheme="blueGray"
-                onPress={() => {
-                  setOpen(false)
-                }}
-              >
-                Cancel
-              </Button>
-              <Button
-                onPress={() => {
-                  setOpen(false)
-                }}
-              >
-                Save
-              </Button>
-            </Button.Group>
-          </Modal.Footer>
-        </Modal.Content>
-      </Modal>
+      {menuVisible && <MenuBar/>}
     </NativeBaseProvider>
   );
 }
-
-const styles = {
-  top: {
-      marginBottom: "auto",
-      marginTop: 0,
-  },
-  bottom: {
-      marginBottom: 0,
-      marginTop: "auto",
-  },
-  left: {
-      marginLeft: 0,
-      marginRight: "auto",
-  },
-  right: {
-      marginLeft: "auto",
-      marginRight: 0,
-  },
-  center: {},
-};
 
 export default App;
