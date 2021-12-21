@@ -69,10 +69,10 @@ export default function Header() {
                             <ArrowForwardIcon size="5" color={_colorIcon} />
                         </Center>
                         <Center size="6" bg={_bgHeader} mr="1">
-                            <UserIcon size="5" color={_colorIcon} press={() => { EventRegister.emit('myCustomEvent', '2.it works!!!'); }} />
+                            <QRCodeIcon size="4" color={_colorIcon} press={() => { EventRegister.emit('myCustomEvent', '3.it works!!!'); }} />
                         </Center>
                         <Center size="6" bg={_bgHeader} mr="1">
-                            <QRCodeIcon size="4" color={_colorIcon} press={() => { EventRegister.emit('myCustomEvent', '3.it works!!!'); }} />
+                            <UserIcon size="5" color={_colorIcon} press={() => { EventRegister.send('USER_OPEN'); }} />
                         </Center>
                     </Flex>
                 </Flex>

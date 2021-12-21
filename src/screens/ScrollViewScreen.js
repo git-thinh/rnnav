@@ -1,12 +1,16 @@
 
 import React from 'react'
-import { ScrollView, StyleSheet, View, Button } from 'react-native';
+import { ScrollView, StyleSheet, View, Dimensions } from 'react-native';
 import { Box } from 'native-base';
 
-import Header from './kit/Header';
+import Header from './shared/Header';
+import Footer from './shared/Footer';
 import { EventRegister } from '../EventRegister'
 
 export default function ScrollViewScreen({ navigation, route }) {
+
+  const _screenHeight = Dimensions.get('window').height;
+  const _screenWidth = Dimensions.get('window').width;
 
   // React.useEffect(() => {
   //   if (route.params?.eventApp) {
@@ -17,8 +21,8 @@ export default function ScrollViewScreen({ navigation, route }) {
 
   return (
     <Box flex={1}>
-      <Header></Header>
-      <ScrollView style={styles.container}>
+      <Header/>
+      <ScrollView style={styles.container} height={_screenHeight - 100}>
         <View style={styles.large} />
         <ScrollView horizontal>
           <View style={styles.small} />
@@ -29,6 +33,7 @@ export default function ScrollViewScreen({ navigation, route }) {
         <View style={styles.small} />
         <View style={styles.large} />
       </ScrollView>
+      <Footer/>
     </Box>
   )
 }

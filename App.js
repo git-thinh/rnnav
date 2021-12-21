@@ -41,7 +41,7 @@ function App() {
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [cartVisible, setCartVisible] = useState(false);
   const [msgVisible, setMsgVisible] = useState(false);
-  const [userVisible, setUserVisible] = useState(true);
+  const [userVisible, setUserVisible] = useState(false);
   const [chatVisible, setChatVisible] = useState(false);
   const [itemVisible, setItemVisible] = useState(false);
   const [contactVisible, setContactVisible] = useState(false);
@@ -68,10 +68,11 @@ function App() {
         case 'USER_CLOSE':
           return setUserVisible(false);
         case 'USER_LOGIN':
-          await AsyncStorage.setItem('@user', o)
+          await AsyncStorage.setItem('@user', JSON.stringify(o));
           _setCode('');
           break;
         //-----------------------------------------------------------
+        case 'LOADING':
         case 'LOADING_OPEN': return setLoadingVisible(true);
         case 'LOADING_CLOSE': return setLoadingVisible(false);
         case 'ADS_OPEN': return setAdsVisible(true);

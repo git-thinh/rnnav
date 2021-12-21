@@ -57,7 +57,9 @@ class EventRegister {
 
   static send(data) {
     const eventName = 'EVENT_APP';
-    EventRegister.emitEvent(eventName, data);
+    let m = data;
+    if (typeof data == 'string') m = { code: data };
+    EventRegister.emitEvent(eventName, m);
   }
 
   /*
