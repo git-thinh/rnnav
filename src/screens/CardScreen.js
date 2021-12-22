@@ -8,12 +8,35 @@ import {
     Center,
     HStack,
     Stack,
-    NativeBaseProvider,
+    VStack,Divider
 } from "native-base"
 
 export const CardScreen = () => {
-    return (
-        <Center flex={1} px="3">
+    const Card001 = () => {
+        return (
+            <Box border="1" borderRadius="md" m={5} bg='light.50'>
+                <VStack space="4" divider={<Divider />}>
+                    <Box px="4" pt="4">
+                        NativeBase
+                    </Box>
+                    <Box px="4">
+                        NativeBase is a free and open source framework that enable developers
+                        to build high-quality mobile apps using React Native iOS and Android
+                        apps with a fusion of ES6.
+                    </Box>
+                    <Box px="4" pb="4">
+                        GeekyAnts
+                    </Box>
+                </VStack>
+            </Box>
+        );
+    };
+
+    return (<>
+        <Center bg='light.500' px={7} py={3}>
+            <Card001 />
+        </Center>
+        <Center flex={1} px="1">
             <Box
                 maxW="80"
                 rounded="lg"
@@ -99,7 +122,7 @@ export const CardScreen = () => {
                 </Stack>
             </Box>
         </Center>
-    )
+    </>)
 }
 
 export default CardScreen;
