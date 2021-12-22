@@ -33,6 +33,8 @@ import ChatBox from './src/shared/ChatBox';
 import ItemBox from './src/shared/ItemBox';
 import Contact from './src/shared/Contact';
 
+import FAB from './src/shared/FAB';
+
 function App() {
   const [_code, _setCode] = useState('');
 
@@ -44,7 +46,7 @@ function App() {
   const [userVisible, setUserVisible] = useState(false);
   const [chatVisible, setChatVisible] = useState(false);
   const [itemVisible, setItemVisible] = useState(false);
-  const [contactVisible, setContactVisible] = useState(true);
+  const [contactVisible, setContactVisible] = useState(false);
 
   useEffect(() => {
     //AsyncStorage.setItem('@code', '');
@@ -164,6 +166,7 @@ function App() {
           <Stack.Screen name="Photo" component={PhotoScreen} />
         </Stack.Navigator>
       </NavigationContainer>
+      <FAB/>
       {menuVisible && <MenuBar />}
       {cartVisible && <ShopCart />}
       {msgVisible && <MessageBox />}

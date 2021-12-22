@@ -27,69 +27,69 @@ import UserIcon from '../icons/UserIcon';
 
 const Contact = (props) => {
 
-    function SearchBar() {
-        return (
-            <VStack
-                space={5}
-                width="100%"
-                divider={
-                    <Box px="2">
-                        <Divider />
-                    </Box>
-                }>
-                <VStack width="100%" space={5} alignItems="center">
-                    <Heading fontSize="lg">Cupertino</Heading>
-                    <Input
-                        placeholder="Search"
-                        variant="filled"
-                        width="100%"
-                        bg="muted.200"
-                        borderRadius="10"
-                        py="1"
-                        px="2"
-                        placeholderTextColor="gray.500"
-                        borderWidth="0"
-                        InputLeftElement={
-                            <SearchIcon
-                                ml="2"
-                                size="5"
-                                color="gray.500"
-                            />
-                        }
-                    />
-                </VStack>
+    // function SearchBar() {
+    //     return (
+    //         <VStack
+    //             space={5}
+    //             width="100%"
+    //             divider={
+    //                 <Box px="2">
+    //                     <Divider />
+    //                 </Box>
+    //             }>
+    //             <VStack width="100%" space={5} alignItems="center">
+    //                 <Heading fontSize="lg">Cupertino</Heading>
+    //                 <Input
+    //                     placeholder="Search"
+    //                     variant="filled"
+    //                     width="100%"
+    //                     bg="muted.200"
+    //                     borderRadius="10"
+    //                     py="1"
+    //                     px="2"
+    //                     placeholderTextColor="gray.500"
+    //                     borderWidth="0"
+    //                     InputLeftElement={
+    //                         <SearchIcon
+    //                             ml="2"
+    //                             size="5"
+    //                             color="gray.500"
+    //                         />
+    //                     }
+    //                 />
+    //             </VStack>
 
-                <VStack width="100%" space={5} alignItems="center">
-                    <Heading fontSize="lg">Material</Heading>
-                    <Input
-                        placeholder="Search People - Places"
-                        bg="transparent"
-                        width="100%"
-                        borderRadius="4"
-                        py="3"
-                        px="1"
-                        fontSize="14"
-                        InputLeftElement={
-                            <SearchIcon
-                                m="2"
-                                ml="3"
-                                size="6"
-                                color="gray.400"
-                            />
-                        }
-                        InputRightElement={
-                            <SearchIcon
-                                m="2"
-                                mr="3"
-                                size="6"
-                                color="gray.400"
-                            />
-                        }
-                    />
-                </VStack>
-            </VStack>
-        );
-    }
+    //             <VStack width="100%" space={5} alignItems="center">
+    //                 <Heading fontSize="lg">Material</Heading>
+    //                 <Input
+    //                     placeholder="Search People - Places"
+    //                     bg="transparent"
+    //                     width="100%"
+    //                     borderRadius="4"
+    //                     py="3"
+    //                     px="1"
+    //                     fontSize="14"
+    //                     InputLeftElement={
+    //                         <SearchIcon
+    //                             m="2"
+    //                             ml="3"
+    //                             size="6"
+    //                             color="gray.400"
+    //                         />
+    //                     }
+    //                     InputRightElement={
+    //                         <SearchIcon
+    //                             m="2"
+    //                             mr="3"
+    //                             size="6"
+    //                             color="gray.400"
+    //                         />
+    //                     }
+    //                 />
+    //             </VStack>
+    //         </VStack>
+    //     );
+    // }
 
     const data = [
         {
@@ -236,8 +236,8 @@ const Contact = (props) => {
                         px="2"
                         placeholderTextColor="gray.500"
                         borderWidth="0"
-                        InputLeftElement={<SearchIcon ml="2" size="3" color="gray.500"/>}
                     />
+                          {/* InputLeftElement={<SearchIcon ml="2" size="3" color="gray.500"/>} */}
             </Center>
             <SwipeListView
                 data={listData}

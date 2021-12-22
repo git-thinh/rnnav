@@ -17,6 +17,9 @@ https://www.reactnative.express/app/project_structure
 
 * Other:
     - @react-native-async-storage/async-storage
+    - react-native-swipe-list-view
 
+    
     # https://react-native-async-storage.github.io/async-storage/docs/usage
     # https://github.com/kirankalyan5/react-native-segmented-control-tab
+    # https://github.com/jemise111/react-native-swipe-list-view
