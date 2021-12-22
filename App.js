@@ -32,6 +32,7 @@ import UserInfo from './src/shared/UserInfo';
 import ChatBox from './src/shared/ChatBox';
 import ItemBox from './src/shared/ItemBox';
 import Contact from './src/shared/Contact';
+import Task from './src/shared/Task';
 
 import FAB from './src/shared/FAB';
 
@@ -47,6 +48,7 @@ function App() {
   const [chatVisible, setChatVisible] = useState(false);
   const [itemVisible, setItemVisible] = useState(false);
   const [contactVisible, setContactVisible] = useState(false);
+  const [taskVisible, setTaskVisible] = useState(false);
 
   useEffect(() => {
     //AsyncStorage.setItem('@code', '');
@@ -79,6 +81,8 @@ function App() {
         case 'LOADING_CLOSE': return setLoadingVisible(false);
         case 'ADS_OPEN': return setAdsVisible(true);
         case 'ADS_CLOSE': return setAdsVisible(false);
+        case 'TASK_OPEN': return setTaskVisible(true);
+        case 'TASK_CLOSE': return setTaskVisible(false);
         //-----------------------------------------------------------
 
         case 'MENU_OPEN':
@@ -174,6 +178,7 @@ function App() {
       {chatVisible && <ChatBox />}
       {itemVisible && <ItemBox />}
       {contactVisible && <Contact />}
+      {taskVisible && <Task />}
     </NativeBaseProvider>
   );
 }

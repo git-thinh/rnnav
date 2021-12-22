@@ -19,9 +19,7 @@ const Loading = (props) => {
                 flex={1} alignItems='center' justifyContent='center'>
                 <Center bg='coolGray.100' p={5}>
                     <Heading>{_title}</Heading>
-                    <Button onPress={() => {
-                        EventRegister.emit('EVENT_APP', { code: 'LOADING_CLOSE' });
-                    }}>Close</Button>
+                    <Button onPress={() => { EventRegister.send('LOADING_CLOSE'); }}>Close</Button>
                 </Center>
             </Box>
         </Box>
