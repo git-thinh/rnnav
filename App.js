@@ -22,6 +22,7 @@ import ViewScreen from './src/screens/ViewScreen';
 import AjaxScreen from './src/screens/AjaxScreen';
 import DrapDropScreen from './src/screens/DrapDropScreen';
 import PhotoScreen from './src/screens/PhotoScreen';
+import CardScreen from './src/screens/CardScreen';
 
 import MenuBar from './src/shared/MenuBar';
 import Ads from './src/shared/Ads';
@@ -153,8 +154,10 @@ function App() {
       {loadingVisible && <Loading />}
       <NavigationContainer>
         {/* <Stack.Screen name="Home"> {props => <HomeScreen {...props} extraData={{ someData: 12345 }} />} </Stack.Screen> */}
-        <Stack.Navigator initialRouteName="ScrollViewScreen" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName="CardScreen" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="ScrollViewScreen" component={ScrollViewScreen} initialParams={{ post: 42 }} />
           <Stack.Screen name="InputScreen" component={InputScreen} />
+          <Stack.Screen name="CardScreen" component={CardScreen} />
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Welcome" component={WelcomeScreen} />
@@ -163,7 +166,6 @@ function App() {
           <Stack.Screen name="List" component={ListScreen} />
           <Stack.Screen name="TouchableOpacity" component={TouchableOpacityScreen} />
           <Stack.Screen name="TouchableHighlight" component={TouchableHighlightScreen} />
-          <Stack.Screen name="ScrollViewScreen" component={ScrollViewScreen} initialParams={{ post: 42 }} />
           <Stack.Screen name="View" component={ViewScreen} />
           <Stack.Screen name="Ajax" component={AjaxScreen} />
           <Stack.Screen name="DrapDrop" component={DrapDropScreen} />
