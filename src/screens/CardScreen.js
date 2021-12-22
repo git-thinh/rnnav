@@ -8,7 +8,7 @@ import {
     Center,
     HStack,
     Stack,
-    VStack,Divider
+    VStack, Divider,Checkbox
 } from "native-base"
 
 export const CardScreen = () => {
@@ -33,6 +33,9 @@ export const CardScreen = () => {
     };
 
     return (<>
+        <Checkbox isChecked colorScheme="green">
+            Finish list Screen
+        </Checkbox>
         <Center bg='light.500' px={7} py={3}>
             <Card001 />
         </Center>
