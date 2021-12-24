@@ -121,17 +121,6 @@ export default function () {
 
     return (
         <NativeBaseProvider>
-            <Button
-                onPress={() => {
-                    toast.show({
-                        title: 'Wrong password',
-                        placement: 'bottom',
-                        status: 'warning',
-                    });
-                }}
-            >
-                Button
-            </Button>
             <Center flex={1} px="2">
                 <SelectKit />
             </Center>
